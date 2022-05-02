@@ -19,13 +19,10 @@ def scrapewikilink(url):
 
     # <a href="/wiki/Code_readability" class="mw-redirect" title="Code readability">code readability</a>
     for link in allinks:
-        try:
-            if link['href'].startswith('/wiki/'):
-                newlink = "https://en.wikipedia.org"+link['href']
-                scrapewikilink(newlink)
-                break
-        except KeyError:
+        if link['href'].find('/wiki/')==-1:
             continue
-
+        newlink="https://en.wikipedia.org"+link['href']
+        break
+    scrapewikilink(newlink)
 
 scrapewikilink(url)
